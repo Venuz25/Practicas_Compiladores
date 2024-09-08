@@ -99,7 +99,7 @@ int main()
         {
             Lexema lex;
 
-            if(palabra != "(" && palabra != ")" && palabra != "{" && palabra != "]" && palabra != "[" && palabra != "]"){
+            if(palabra != "(" && palabra != ")" && palabra != "{" && palabra != "}" && palabra != "[" && palabra != "]"){
                 for(char c : palabra){
                     if(c != '"'){
                         lex.lexema += c;

@@ -16,6 +16,14 @@ struct Lexema
 // determinar el token
 string obtenerToken(const string &lexema)
 {
+    //Delimitador inicial
+    if(lexema[0] == '(' || lexema[0] == '{' || lexema[0] == '[')
+        return obtenerToken(lexema.substr(1));
+    
+    //Delimitador inicial
+    if(lexema[lexema.size()-1] == ')' || lexema[lexema.size()-1] == ']' ||lexema[lexema.size()-1] == ']')
+        return obtenerToken(lexema.substr(0, lexema.size()-1));
+    
     // Literales
     if (lexema[0] == '"'){
         lit = true;
@@ -91,6 +99,7 @@ int main()
 
     vector<Lexema> lexemas;
     string palabra, linea;
+    size_t position;
 
     while (getline(archivo, linea))
     {
@@ -101,14 +110,24 @@ int main()
 
             if(palabra != "(" && palabra != ")" && palabra != "{" && palabra != "}" && palabra != "[" && palabra != "]"){
                 for(char c : palabra){
-                    if(c != '"'){
+                    if(c != '"' && c != '(' && c != ')' && c != '{' && c != '}' && c != '[' && c != ']' && c != ';'){
                         lex.lexema += c;
                     }
                 } 
 
                 lex.token = obtenerToken(palabra);
 
-                if(palabra.substr(0, 2) != "/*" && (palabra.substr(0, 2) != "*/" || (palabra.length() > 2 && palabra.substr(palabra.size()-2, 2) != "*/"))){
+                if(palabra.substr(0, 2) != "/*" && palabra.substr(0, 2) != "*/"){
+                    position = lex.lexema.find("/*");
+                    if(position != string::npos){
+                        lex.lexema.erase(position, 2);
+                    }
+
+                    position = lex.lexema.find("*/");
+                    if(position != string::npos){
+                        lex.lexema.erase(position, 2);
+                    }
+
                     lexemas.push_back(lex);
                 }
             }

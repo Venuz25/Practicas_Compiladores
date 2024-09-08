@@ -37,10 +37,6 @@ string obtenerToken(const string &lexema)
     }
     else if(com)
         return "comentario";
-
-    //Delimitador
-    if(lexema == "(" || lexema == ")" || lexema == "{" || lexema == "]" || lexema == "[" || lexema == "]")
-        return "delimitador";
     
     // Tipos de variables
     if (lexema == "int" || lexema == "float" || lexema == "double" || lexema == "char" || lexema == "string" || lexema == "bool")
@@ -102,9 +98,20 @@ int main()
         while (palabras >> palabra)
         {
             Lexema lex;
-            lex.lexema = palabra;
-            lex.token = obtenerToken(palabra);
-            lexemas.push_back(lex);
+
+            if(palabra != "(" && palabra != ")" && palabra != "{" && palabra != "]" && palabra != "[" && palabra != "]"){
+                for(char c : palabra){
+                    if(c != '"'){
+                        lex.lexema += c;
+                    }
+                } 
+
+                lex.token = obtenerToken(palabra);
+
+                if(palabra.substr(0, 2) != "/*" && (palabra.substr(0, 2) != "*/" || (palabra.length() > 2 && palabra.substr(palabra.size()-2, 2) != "*/"))){
+                    lexemas.push_back(lex);
+                }
+            }
         }
     }
 

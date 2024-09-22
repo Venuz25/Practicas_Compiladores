@@ -187,13 +187,17 @@ Lexema Id(const string &lexema)
         switch (estado)
         {
         case 0:
-            if(isalpha(carac) || carac == '_') estado = 1;
-            else estado = -1;
+            if (isalpha(carac) || carac == '_')
+                estado = 1;
+            else
+                estado = -1;
             break;
-        
+
         case 1:
-            if(isalnum(carac) || carac == '_') estado = 1;
-            else estado = -1;
+            if (isalnum(carac) || carac == '_')
+                estado = 1;
+            else
+                estado = -1;
             break;
 
         default:
@@ -201,7 +205,8 @@ Lexema Id(const string &lexema)
         }
     }
 
-    if(estado == 1){
+    if (estado == 1)
+    {
         return {"id", "id", lexema};
     }
 }
@@ -217,48 +222,67 @@ Lexema Num(const string &lexema)
         switch (estado)
         {
         case 0:
-            if(isdigit(carac)) estado = 1;
-            else estado = -1;
-            break;
-        
-        case 1: //digito
-            if(isdigit(carac)) estado = 1;
-            else if(carac == '.') estado = 2;
-            else if(carac == 'E'||carac == 'e') estado = 4;
-            else estado = -1;
-            break;
-        
-        case 2:
-            if(isdigit(carac)) estado = 3;
-            else -1;
-            break;
-        
-        case 3: //digito
-            if(isdigit(carac)) estado = 3;
-            else if(carac == 'E'||carac == 'e') estado = 4;
-            else estado = -1;
-            break;
-        
-        case 4:
-            if(carac == '+' || carac == '-') estado = 5;
-            else if(isdigit(carac)) estado = 6;
-            else estado = -1;
-            break;
-        
-        case 5:
-            if(isdigit(carac)) estado = 6;
-            else estado =-1;
+            if (isdigit(carac))
+                estado = 1;
+            else
+                estado = -1;
             break;
 
-        case 6: //digito
-            if(isdigit(carac)) estado = 6;
-            else estado = -1;
+        case 1: // digito
+            if (isdigit(carac))
+                estado = 1;
+            else if (carac == '.')
+                estado = 2;
+            else if (carac == 'E' || carac == 'e')
+                estado = 4;
+            else
+                estado = -1;
+            break;
+
+        case 2:
+            if (isdigit(carac))
+                estado = 3;
+            else
+                -1;
+            break;
+
+        case 3: // digito
+            if (isdigit(carac))
+                estado = 3;
+            else if (carac == 'E' || carac == 'e')
+                estado = 4;
+            else
+                estado = -1;
+            break;
+
+        case 4:
+            if (carac == '+' || carac == '-')
+                estado = 5;
+            else if (isdigit(carac))
+                estado = 6;
+            else
+                estado = -1;
+            break;
+
+        case 5:
+            if (isdigit(carac))
+                estado = 6;
+            else
+                estado = -1;
+            break;
+
+        case 6: // digito
+            if (isdigit(carac))
+                estado = 6;
+            else
+                estado = -1;
             break;
         default:
             break;
         }
     }
-    if(estado == 1 || estado == 3 || estado == 6 ){
+    if (estado == 1 || estado == 3 || estado == 6)
+    {
         return {"numero", "numero", lexema};
     }
 }

@@ -59,6 +59,7 @@ Lexema Opera(const string &lexema)
             break;
         }
     }
+    return {"desconocido", "desconocido", lexema};
 }
 
 Lexema ifi(const string &lexema)
@@ -90,6 +91,7 @@ Lexema ifi(const string &lexema)
             break;
         }
     }
+    return {"desconocido", "desconocido", lexema};
 }
 Lexema elsei(const string &lexema)
 {
@@ -131,6 +133,7 @@ Lexema elsei(const string &lexema)
             break;
         }
     }
+    return {"desconocido", "desconocido", lexema};
 }
 Lexema theni(const string &lexema)
 {
@@ -173,6 +176,7 @@ Lexema theni(const string &lexema)
             break;
         }
     }
+    return {"desconocido", "desconocido", lexema};
 }
 
 Lexema Id(const string &lexema)
@@ -209,6 +213,7 @@ Lexema Id(const string &lexema)
     {
         return {"id", "id", lexema};
     }
+    return {"desconocido", "desconocido", lexema};
 }
 
 Lexema Num(const string &lexema)
@@ -285,6 +290,7 @@ Lexema Num(const string &lexema)
     {
         return {"numero", "numero", lexema};
     }
+    return {"desconocido", "desconocido", lexema};
 }
 
 int main()
